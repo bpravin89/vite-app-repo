@@ -1,26 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
-
+import React from 'react'
+import FirstScreen from "./components/FirstScreen"
+import SecondScreen from "./components/SecondScreen"
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [quizStarted, setQuizStarted] = React.useState(false)
+    
+  function toggleQuiz() {
+    setQuizStarted(prevState => !prevState)
+}
   return (
-    <div className="App">
-      
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <main>
+           {!quizStarted && <FirstScreen startQuiz={toggleQuiz}/>}
+            
+            {quizStarted && <SecondScreen toggleQuiz={toggleQuiz}/>
+            }
+            
+        </main>
   )
 }
 
